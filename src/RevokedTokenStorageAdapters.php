@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -32,7 +32,7 @@ class RevokedTokenStorageAdapters
     /**
      * @var self
      */
-    private static $instance = null;
+    private static $instance;
 
     /**
      * Creates a singleton object by making the constructor private.
@@ -75,7 +75,7 @@ class RevokedTokenStorageAdapters
      *
      * @return RevokedTokenStorageAdapter
      */
-    public function adapt(?string $name = null)
+    public function adapt(string $name = null)
     {
         return $this->adapters[$name ?? $this->default] ?? new ArrayStorageAdapter();
     }
@@ -85,7 +85,7 @@ class RevokedTokenStorageAdapters
      *
      * @return RevokedTokenStorageAdapter
      */
-    public function default(?string $name = null)
+    public function default(string $name = null)
     {
         if (null !== $name) {
             $this->default = $name;

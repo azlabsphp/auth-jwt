@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -39,7 +39,7 @@ interface AccessTokenEntity extends Token, JsonSerializable
      *
      * @return string|null
      */
-    public function id(?string $value = null);
+    public function id(string $value = null);
 
     /**
      * @param string|\DatetimeInterface|null $value
@@ -73,9 +73,9 @@ interface AccessTokenEntity extends Token, JsonSerializable
     public function markAsRevoked();
 
     /**
-     * Returns array representation of the instance
-     * 
-     * @return array 
+     * Returns array representation of the instance.
+     *
+     * @return array
      */
     public function toArray();
 }

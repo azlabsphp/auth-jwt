@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the drewlabs namespace.
+ *
+ * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Drewlabs\Auth\Jwt;
 
 use Drewlabs\Auth\Jwt\Contracts\ClaimsConfigInterface;
@@ -17,10 +28,10 @@ class ClaimsConfig implements ClaimsConfigInterface
     private $ttl;
 
     /**
-     * Creates claims config instance
-     * 
-     * @param string $issuer 
-     * @param int $ttl 
+     * Creates claims config instance.
+     *
+     * @param string $issuer
+     * @param int    $ttl
      */
     public function __construct(string $issuer = null, $ttl = 360)
     {
@@ -29,10 +40,9 @@ class ClaimsConfig implements ClaimsConfigInterface
     }
 
     /**
-     * factory constructor implementation
-     * 
-     * @param array $attributes 
-     * @return static 
+     * factory constructor implementation.
+     *
+     * @return static
      */
     public static function create(array $attributes)
     {
@@ -40,9 +50,9 @@ class ClaimsConfig implements ClaimsConfigInterface
     }
 
     /**
-     * Returns claim issuer
-     * 
-     * @return string 
+     * Returns claim issuer.
+     *
+     * @return string
      */
     public function getIssuer()
     {
@@ -50,9 +60,9 @@ class ClaimsConfig implements ClaimsConfigInterface
     }
 
     /**
-     * Returns claims time to live
-     * 
-     * @return int 
+     * Returns claims time to live.
+     *
+     * @return int
      */
     public function getTTl()
     {

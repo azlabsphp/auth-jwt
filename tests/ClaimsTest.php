@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Drewlabs\Contracts\Jwt\ClaimsInterface;
 use Drewlabs\Auth\Jwt\Payload\Claims;
 use Drewlabs\Auth\Jwt\Payload\ClaimTypes;
+use Drewlabs\Contracts\Jwt\ClaimsInterface;
 use PHPUnit\Framework\TestCase;
 
 class ClaimsTest extends TestCase
@@ -47,7 +47,7 @@ class ClaimsTest extends TestCase
         ]);
         $this->assertSame(1, $payload['sub']);
         $this->assertSame(['*'], $payload['scopes']);
-        $this->assertTrue(\in_array(ClaimTypes::JIT, array_keys($payload), true));
+        $this->assertTrue(in_array(ClaimTypes::JIT, array_keys($payload), true));
         $this->assertSame($exp->getTimestamp(), $payload[ClaimTypes::EXPIRATION]);
         $this->assertSame((new \DateTimeImmutable())->getTimestamp(), $payload[ClaimTypes::NOT_BEFORE]);
     }

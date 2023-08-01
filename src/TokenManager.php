@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace Drewlabs\Auth\Jwt;
 
-use Drewlabs\Contracts\Jwt\JWTInterface;
-use Drewlabs\Contracts\Jwt\PayloadFactoryInterface;
-use Drewlabs\Contracts\Jwt\PayloadVerifier;
-use Drewlabs\Core\Helpers\ImmutableDateTime;
 use Drewlabs\Auth\Jwt\Contracts\AccessTokenEntity;
 use Drewlabs\Auth\Jwt\Contracts\RevokeTokenManager;
 use Drewlabs\Auth\Jwt\Contracts\TokenManagerInterface;
@@ -25,6 +21,10 @@ use Drewlabs\Auth\Jwt\Exceptions\TokenExpiredException;
 use Drewlabs\Auth\Jwt\Exceptions\TokenRevokedException;
 use Drewlabs\Auth\Jwt\Payload\ClaimTypes;
 use Drewlabs\Auth\Jwt\Payload\PayloadVerifier as PayloadPayloadVerifier;
+use Drewlabs\Contracts\Jwt\JWTInterface;
+use Drewlabs\Contracts\Jwt\PayloadFactoryInterface;
+use Drewlabs\Contracts\Jwt\PayloadVerifier;
+use Drewlabs\Core\Helpers\ImmutableDateTime;
 
 final class TokenManager implements TokenManagerInterface
 {
@@ -62,12 +62,9 @@ final class TokenManager implements TokenManagerInterface
     private $payloadVerifier;
 
     /**
-     * Create tokens manager instance
-     * 
-     * @param JWTInterface $jwt 
-     * @param PayloadFactoryInterface $factory 
-     * @param int $ttl 
-     * @return void 
+     * Create tokens manager instance.
+     *
+     * @return void
      */
     public function __construct(
         JWTInterface $jwt,

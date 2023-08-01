@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -16,10 +16,10 @@ namespace Drewlabs\Auth\Jwt\Exceptions;
 class RefreshTokenExpiredException extends TokenException
 {
     /**
-     * Creates exception class instance
-     * 
-     * @param string $message 
-     * @param int $code 
+     * Creates exception class instance.
+     *
+     * @param string $message
+     * @param int    $code
      */
     public function __construct($message = 'Unauthorized access, refresh token has expired', $code = 401)
     {

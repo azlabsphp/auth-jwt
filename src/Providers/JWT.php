@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Drewlabs\Auth\Jwt\Providers;
 
-use Drewlabs\Contracts\Jwt\JWTInterface;
 use Drewlabs\Auth\Jwt\Exceptions\DecodeTokenException;
+use Drewlabs\Contracts\Jwt\JWTInterface;
 use Firebase\JWT\JWT as FirebaseJWT;
 use Firebase\JWT\Key as JWTKey;
 
@@ -49,12 +49,12 @@ class JWT implements JWTInterface
     public function __construct($key)
     {
         if (!\is_string($key) && !($key instanceof AsymmetricKey) && !($key instanceof Key)) {
-            throw new \InvalidArgumentException('Expect key parameter to be of type '.AsymmetricKey::class.', '.Key::class.' or string '.'got: '.(\is_object($key) && (null !== $key) ? \get_class($key) : \gettype($key)));
+            throw new \InvalidArgumentException('Expect key parameter to be of type '.AsymmetricKey::class.', '.Key::class.' or string got: '.(\is_object($key) && (null !== $key) ? $key::class : \gettype($key)));
         }
         if ($key instanceof AsymmetricKey) {
             return $this->configureForSSL($key);
         }
-        
+
         $this->configureForHMAC($key);
     }
 
@@ -67,7 +67,7 @@ class JWT implements JWTInterface
      */
     public function encode($payload): ?string
     {
-        return (string) (FirebaseJWT::encode($payload, $this->encryptionKey, $this->alg));
+        return (string) FirebaseJWT::encode($payload, $this->encryptionKey, $this->alg);
     }
 
     /**
@@ -78,7 +78,7 @@ class JWT implements JWTInterface
     public function decode($token): object
     {
         try {
-            return (object) (FirebaseJWT::decode($token, new JWTKey($this->decryptionKey, $this->alg)));
+            return (object) FirebaseJWT::decode($token, new JWTKey($this->decryptionKey, $this->alg));
         } catch (\Firebase\JWT\SignatureInvalidException $e) {
             throw new DecodeTokenException($e->getMessage());
         } catch (\Firebase\JWT\BeforeValidException $e) {

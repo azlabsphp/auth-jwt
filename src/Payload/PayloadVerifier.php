@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -51,6 +51,7 @@ class PayloadVerifier implements JwtPayloadVerifier
         if (!\is_string($payload[ClaimTypes::ISSUER] ?? null) || !Str::same($payload[ClaimTypes::ISSUER] ?? null, $claims->getiss())) {
             return false;
         }
+
         return true;
     }
 }

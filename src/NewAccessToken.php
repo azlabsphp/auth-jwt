@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Drewlabs\Auth\Jwt;
 
-use Drewlabs\Contracts\OAuth\Token;
 use Drewlabs\Auth\Jwt\Contracts\AccessTokenEntity;
+use Drewlabs\Contracts\OAuth\Token;
 
 /**
  * @method bool revoke()
@@ -37,12 +37,9 @@ class NewAccessToken implements \JsonSerializable
     public $plainTextToken;
 
     /**
-     * 
-     * @param Token $token 
-     * @param null|string $plainTextToken 
-     * @return self 
+     * @return self
      */
-    public function __construct(Token $token, ?string $plainTextToken = null)
+    public function __construct(Token $token, string $plainTextToken = null)
     {
         $this->accessToken = $token;
         $this->plainTextToken = $plainTextToken;

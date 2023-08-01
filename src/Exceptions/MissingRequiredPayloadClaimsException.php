@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -16,8 +16,7 @@ namespace Drewlabs\Auth\Jwt\Exceptions;
 class MissingRequiredPayloadClaimsException extends TokenException
 {
     /**
-     * Creates exception class instance
-     * 
+     * Creates exception class instance.
      */
     public function __construct()
     {

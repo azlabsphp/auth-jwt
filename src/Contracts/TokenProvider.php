@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -19,17 +19,14 @@ use Psr\Http\Message\ServerRequestInterface;
 interface TokenProvider
 {
     /**
-     * Retrieve authenticatable instance from psr7 request
-     * 
-     * @param ServerRequestInterface $request 
+     * Retrieve authenticatable instance from psr7 request.
+     *
      * @return HasApiTokens
      */
     public function findByRequest(ServerRequestInterface $request);
 
     /**
-     * Retrieve authenticatable instance using bearer token string
-     *
-     * @param string $bearerToken
+     * Retrieve authenticatable instance using bearer token string.
      *
      * @return HasApiTokens
      */

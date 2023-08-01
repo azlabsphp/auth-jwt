@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Drewlabs\Auth\Jwt;
 
-use DateTimeInterface;
 use Drewlabs\Auth\Jwt\Contracts\AccessTokenEntity;
 use Drewlabs\Auth\Jwt\Contracts\CsrfTokenAware;
 use Drewlabs\Auth\Jwt\Contracts\LastUsedStateAware;
@@ -31,17 +30,17 @@ class AccessToken implements AccessTokenEntity, LastUsedStateAware, CsrfTokenAwa
      *
      * @var string|int
      */
-    private $sub = null;
+    private $sub;
 
     /**
      * @var string
      */
-    private $jti = null;
+    private $jti;
 
     /**
      * @var string|\DateTimeInterface
      */
-    private $expiresAt_ = null;
+    private $expiresAt_;
 
     /**
      * @var string|\DateTimeInterface
@@ -107,8 +106,8 @@ class AccessToken implements AccessTokenEntity, LastUsedStateAware, CsrfTokenAwa
     {
         $abilities = $this->abilities();
 
-        return \in_array('*', $abilities, true) ||
-            \array_key_exists($ability, array_flip($abilities));
+        return \in_array('*', $abilities, true)
+            || \array_key_exists($ability, array_flip($abilities));
     }
 
     public function cant($ability)
@@ -134,7 +133,7 @@ class AccessToken implements AccessTokenEntity, LastUsedStateAware, CsrfTokenAwa
         return $this->sub;
     }
 
-    public function id(?string $value = null)
+    public function id(string $value = null)
     {
         if (null !== $value) {
             $this->jti = $value;
@@ -194,7 +193,7 @@ class AccessToken implements AccessTokenEntity, LastUsedStateAware, CsrfTokenAwa
         return $this;
     }
 
-    public function csrfToken(?string $value = null)
+    public function csrfToken(string $value = null)
     {
         if (null !== $value) {
             $this->token_ = $value;
@@ -210,8 +209,8 @@ class AccessToken implements AccessTokenEntity, LastUsedStateAware, CsrfTokenAwa
             'id' => $this->subject(),
             'idToken' => $this->id(),
             'scopes' => $this->abilities(),
-            'expiresAt' => ($date = $this->expiresAt()) instanceof DateTimeInterface ? $date->format(\DateTimeImmutable::ATOM) : $date,
-            'iat' => ($iat = $this->issuedAt()) instanceof DateTimeInterface ? $iat->format(\DateTimeImmutable::ATOM) : $iat,
+            'expiresAt' => ($date = $this->expiresAt()) instanceof \DateTimeInterface ? $date->format(\DateTimeImmutable::ATOM) : $date,
+            'iat' => ($iat = $this->issuedAt()) instanceof \DateTimeInterface ? $iat->format(\DateTimeImmutable::ATOM) : $iat,
             'iss' => $this->issuer(),
         ];
     }

@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the drewlabs namespace.
+ *
+ * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Drewlabs\Auth\Jwt;
 
 use Drewlabs\Auth\Jwt\Contracts\AccessTokenEntity;
@@ -19,7 +30,6 @@ use Drewlabs\Contracts\OAuth\HasApiTokens;
 use Drewlabs\Core\Helpers\Reflector;
 use Drewlabs\Core\Helpers\Str;
 use Psr\Http\Message\ServerRequestInterface;
-use Throwable;
 
 class BearerTokenProvider implements TokenProvider
 {
@@ -39,11 +49,7 @@ class BearerTokenProvider implements TokenProvider
     private $users;
 
     /**
-     * Creates bearer token class instance
-     * 
-     * @param TokenManagerInterface $tokens 
-     * @param UserProvider $users 
-     * @param AccessTokenRepository|null $repository 
+     * Creates bearer token class instance.
      */
     public function __construct(TokenManagerInterface $tokens, UserProvider $users, AccessTokenRepository $repository = null)
     {
@@ -56,23 +62,23 @@ class BearerTokenProvider implements TokenProvider
     {
         $bearerToken = $this->getBearerTokenFromRequest($request);
 
-        return $this->findByBearerToken((string)$bearerToken);
+        return $this->findByBearerToken((string) $bearerToken);
     }
 
     public function findByBearerToken(string $bearerToken)
     {
         try {
             $accessToken = $this->tokens->decodeToken($bearerToken);
-            $tokenable = $this->users->findById((string)$accessToken->subject());
+            $tokenable = $this->users->findById((string) $accessToken->subject());
             if (
-                !$this->supportsTokens($tokenable) ||
-                !$this->isValidAccessToken($accessToken)
+                !$this->supportsTokens($tokenable)
+                || !$this->isValidAccessToken($accessToken)
             ) {
                 return;
             }
             if (
-                $this->repository &&
-                ($accessToken instanceof LastUsedStateAware)
+                $this->repository
+                && ($accessToken instanceof LastUsedStateAware)
             ) {
                 $accessToken->lastUsedAt(new \DateTimeImmutable());
                 $this->repository->persist($accessToken);
@@ -88,31 +94,31 @@ class BearerTokenProvider implements TokenProvider
     }
 
     /**
-     * Checks if exception is instance of token exception
-     * 
-     * @param Throwable $exception 
-     * @return bool 
+     * Checks if exception is instance of token exception.
+     *
+     * @return bool
      */
     private function isTokenException(\Throwable $exception)
     {
-        return $exception instanceof DecodeTokenException ||
-            $exception instanceof MissingRequiredPayloadClaimsException ||
-            $exception instanceof MissingTokenException ||
-            $exception instanceof RefreshTokenExpiredException ||
-            $exception instanceof RefreshTokenNotFound ||
-            $exception instanceof TokenExpiredException ||
-            $exception instanceof TokenRevokedException;
+        return $exception instanceof DecodeTokenException
+            || $exception instanceof MissingRequiredPayloadClaimsException
+            || $exception instanceof MissingTokenException
+            || $exception instanceof RefreshTokenExpiredException
+            || $exception instanceof RefreshTokenNotFound
+            || $exception instanceof TokenExpiredException
+            || $exception instanceof TokenRevokedException;
     }
 
     /**
-     * Query for bearer token from psr7 server request instance
-     * 
-     * @param ServerRequestInterface $request 
-     * @param string $method 
-     * @param string $header 
-     * @param string $query 
+     * Query for bearer token from psr7 server request instance.
+     *
+     * @param string $method
+     * @param string $header
+     * @param string $query
+     *
+     * @throws MissingTokenException
+     *
      * @return string
-     * @throws MissingTokenException 
      */
     private function getBearerTokenFromRequest(ServerRequestInterface $request, $method = 'bearer', $header = 'authorization', $query = 'token')
     {
@@ -127,8 +133,6 @@ class BearerTokenProvider implements TokenProvider
         }
         throw new MissingTokenException('Token key not found');
     }
-
-
 
     /**
      * Parse token from the authorization header.
@@ -157,10 +161,9 @@ class BearerTokenProvider implements TokenProvider
     }
 
     /**
-     * Check if access token is valid
-     * 
-     * @param AccessTokenEntity $token 
-     * @return bool 
+     * Check if access token is valid.
+     *
+     * @return bool
      */
     private function isValidAccessToken(AccessTokenEntity $token)
     {
@@ -179,6 +182,7 @@ class BearerTokenProvider implements TokenProvider
         if (null === $tokenable) {
             return false;
         }
+
         return $tokenable instanceof HasApiTokens || Reflector::usesRecursive($tokenable, 'withAccessToken');
     }
 }

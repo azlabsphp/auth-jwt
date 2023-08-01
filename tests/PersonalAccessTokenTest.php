@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Drewlabs\Contracts\OAuth\Token;
 use Drewlabs\Auth\Jwt\AccessToken;
 use Drewlabs\Auth\Jwt\Payload\Claims;
 use Drewlabs\Auth\Jwt\Payload\ClaimTypes;
 use Drewlabs\Auth\Jwt\Payload\PayloadFactory;
+use Drewlabs\Contracts\OAuth\Token;
 use PHPUnit\Framework\TestCase;
 
 class PersonalAccessTokenTest extends TestCase
@@ -61,9 +61,9 @@ class PersonalAccessTokenTest extends TestCase
     {
         $payload = $this->createPayload();
         $pat = new AccessToken($payload);
-        $this->assertEquals($payload[ClaimTypes::ISSUER], $pat->issuer());
-        $this->assertEquals(\DateTimeImmutable::createFromFormat(\DateTime::ISO8601, date(\DateTime::ISO8601, $payload[ClaimTypes::ISSUE_AT])), $pat->issuedAt());
-        $this->assertEquals(\DateTimeImmutable::createFromFormat(\DateTime::ISO8601, date(\DateTime::ISO8601, $payload[ClaimTypes::EXPIRATION])), $pat->expiresAt());
-        $this->assertEquals($payload[ClaimTypes::JIT], $pat->id());
+        $this->assertSame($payload[ClaimTypes::ISSUER], $pat->issuer());
+        $this->assertSame(\DateTimeImmutable::createFromFormat(\DateTimeImmutable::ATOM, date(\DateTimeImmutable::ATOM, $payload[ClaimTypes::ISSUE_AT]))->getTimestamp(), $pat->issuedAt()->getTimestamp());
+        $this->assertSame(\DateTimeImmutable::createFromFormat(\DateTimeImmutable::ATOM, date(\DateTime::ATOM, $payload[ClaimTypes::EXPIRATION]))->getTimestamp(), $pat->expiresAt()->getTimestamp());
+        $this->assertSame($payload[ClaimTypes::JIT], $pat->id());
     }
 }

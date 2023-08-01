@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Drewlabs\Auth\Jwt;
 
-use Drewlabs\Core\Helpers\ImmutableDateTime;
 use Drewlabs\Auth\Jwt\Contracts\AccessTokenEntity;
 use Drewlabs\Auth\Jwt\Contracts\RevokeTokenManager;
 use Drewlabs\Auth\JwtOauth\Contracts\RevokedTokenStorageAdapter;
+use Drewlabs\Core\Helpers\ImmutableDateTime;
 
 class RevokedTokens implements RevokeTokenManager
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -28,7 +28,7 @@ class KeyFactory
     {
         // ssl encrypt have precedence over the default HS256 encryption algorithm
         if (isset($config['encryption']['ssl']['key'])) {
-            $key =  $config['encryption']['ssl']['key'];
+            $key = $config['encryption']['ssl']['key'];
             if (\is_string($key) && file_exists($key)) {
                 return AsymmetricKey::loadFromFile($key, $config['encryption']['ssl']['passphrase']);
             }

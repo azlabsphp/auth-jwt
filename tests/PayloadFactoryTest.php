@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Drewlabs\Contracts\Jwt\PayloadFactoryInterface;
-use Drewlabs\Core\Helpers\ImmutableDateTime;
 use Drewlabs\Auth\Jwt\Payload\Claims;
 use Drewlabs\Auth\Jwt\Payload\ClaimTypes;
 use Drewlabs\Auth\Jwt\Payload\PayloadFactory;
+use Drewlabs\Contracts\Jwt\PayloadFactoryInterface;
+use Drewlabs\Core\Helpers\ImmutableDateTime;
 use PHPUnit\Framework\TestCase;
 
 class PayloadFactoryTest extends TestCase
@@ -43,7 +43,7 @@ class PayloadFactoryTest extends TestCase
         ]);
         $this->assertSame(1, $payload['sub']);
         $this->assertSame(['*'], $payload['scopes']);
-        $this->assertTrue(\in_array(ClaimTypes::JIT, array_keys($payload), true));
+        $this->assertTrue(in_array(ClaimTypes::JIT, array_keys($payload), true));
         $this->assertSame($exp->getTimestamp(), $payload[ClaimTypes::EXPIRATION]);
         $this->assertSame((new \DateTimeImmutable())->getTimestamp(), $payload[ClaimTypes::NOT_BEFORE]);
         $this->assertTrue(ImmutableDateTime::isfuture(\DateTimeImmutable::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s', $payload[ClaimTypes::EXPIRATION]))));

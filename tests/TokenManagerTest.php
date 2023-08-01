@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Drewlabs package.
+ * This file is part of the drewlabs namespace.
  *
  * (c) Sidoine Azandrew <azandrewdevelopper@gmail.com>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Drewlabs\Core\Helpers\Str;
 use Drewlabs\Auth\Jwt\Contracts\AccessTokenEntity;
 use Drewlabs\Auth\Jwt\Contracts\TokenManagerInterface;
 use Drewlabs\Auth\Jwt\Factory;
 use Drewlabs\Auth\Jwt\NewAccessToken;
 use Drewlabs\Auth\Jwt\Payload\ClaimTypes;
+use Drewlabs\Core\Helpers\Str;
 use PHPUnit\Framework\TestCase;
 
 class TokenManagerTest extends TestCase
@@ -93,10 +93,11 @@ class TokenManagerTest extends TestCase
 
             'encryption' => [
                 'default' => [
-                    'key' => Str::base62encode(random_bytes(32))
+                    'key' => Str::base62encode(random_bytes(32)),
                 ],
             ],
         ];
-        return (new Factory)->create($config);
+
+        return (new Factory())->create($config);
     }
 }
