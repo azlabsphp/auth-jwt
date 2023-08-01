@@ -1,3 +1,3 @@
 # Auth Jwt
 
-Framework agnostic oauth implementation library
+Documentation is under development.
