@@ -11,6 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Drewlabs\Auth\Jwt;
+
 use Drewlabs\Auth\Jwt\Contracts\AccessTokenEntity;
 use Drewlabs\Auth\Jwt\Contracts\AccessTokenRepository;
 use Drewlabs\Auth\Jwt\Contracts\RevokedTokenStorageAdapter;
