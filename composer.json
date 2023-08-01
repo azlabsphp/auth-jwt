@@ -1,0 +1,36 @@
+{
+    "name": "drewlabs/auth-jwt",
+    "description": "Jwt Components for drewlabs/auth authentication library",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "oauth",
+        "auth"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Drewlabs\\Auth\\Jwt\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "azandrew-sidoine",
+            "email": "azandrewdevelopper@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.0|^8.0",
+        "drewlabs/contracts": "^0.2.23",
+        "drewlabs/core-helpers": "^0.2.2",
+        "firebase/php-jwt": "^6.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=6.0"
+    }
+}
