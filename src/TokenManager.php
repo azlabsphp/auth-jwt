@@ -14,17 +14,17 @@ declare(strict_types=1);
 namespace Drewlabs\Auth\Jwt;
 
 use Drewlabs\Auth\Jwt\Contracts\AccessTokenEntity;
+use Drewlabs\Auth\Jwt\Contracts\JWTInterface;
+use Drewlabs\Auth\Jwt\Contracts\PayloadFactoryInterface;
 use Drewlabs\Auth\Jwt\Contracts\RevokeTokenManager;
 use Drewlabs\Auth\Jwt\Contracts\TokenManagerInterface;
 use Drewlabs\Auth\Jwt\Exceptions\MissingRequiredPayloadClaimsException;
 use Drewlabs\Auth\Jwt\Exceptions\TokenExpiredException;
 use Drewlabs\Auth\Jwt\Exceptions\TokenRevokedException;
 use Drewlabs\Auth\Jwt\Payload\ClaimTypes;
-use Drewlabs\Auth\Jwt\Payload\PayloadVerifier as PayloadPayloadVerifier;
-use Drewlabs\Contracts\Jwt\JWTInterface;
-use Drewlabs\Contracts\Jwt\PayloadFactoryInterface;
-use Drewlabs\Contracts\Jwt\PayloadVerifier;
-use Drewlabs\Core\Helpers\ImmutableDateTime;
+use Drewlabs\Auth\Jwt\Contracts\PayloadVerifier as AbstractPayloadVerifier;
+use Drewlabs\Auth\Jwt\Payload\PayloadVerifier;
+use Drewlabs\Core\Helpers\DateTime;
 
 final class TokenManager implements TokenManagerInterface
 {
@@ -57,7 +57,7 @@ final class TokenManager implements TokenManagerInterface
     private $factory;
 
     /**
-     * @var PayloadVerifier
+     * @var AbstractPayloadVerifier
      */
     private $payloadVerifier;
 
@@ -74,7 +74,7 @@ final class TokenManager implements TokenManagerInterface
         $this->jwt = $jwt;
         $this->revokeTokens = new RevokedTokens($ttl);
         $this->factory = $factory;
-        $this->payloadVerifier = new PayloadPayloadVerifier($factory);
+        $this->payloadVerifier = new PayloadVerifier($factory);
         $this->refreshTTL = $ttl;
     }
 
@@ -104,7 +104,7 @@ final class TokenManager implements TokenManagerInterface
     public function refreshToken($token)
     {
         $accessToken = $this->decodeToken($token);
-        $tokenHasExpired = ImmutableDateTime::ispast(ImmutableDateTime::addMinutes(ImmutableDateTime::timestamp($accessToken[ClaimTypes::ISSUE_AT]), $this->refreshTTL));
+        $tokenHasExpired = DateTime::ispast(DateTime::addMinutes(DateTime::timestamp($accessToken[ClaimTypes::ISSUE_AT]), $this->refreshTTL));
         if ($tokenHasExpired) {
             throw new TokenExpiredException('Cannot refresh token, refresh time expired');
         }

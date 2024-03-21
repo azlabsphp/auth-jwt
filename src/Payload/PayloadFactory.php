@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Drewlabs\Auth\Jwt\Payload;
 
-use Drewlabs\Contracts\Jwt\ClaimsInterface;
-use Drewlabs\Contracts\Jwt\PayloadFactoryInterface;
+use Drewlabs\Auth\Jwt\Contracts\ClaimsInterface;
+use Drewlabs\Auth\Jwt\Contracts\PayloadFactoryInterface;
 
 class PayloadFactory implements PayloadFactoryInterface
 {

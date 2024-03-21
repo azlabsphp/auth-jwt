@@ -13,10 +13,14 @@ declare(strict_types=1);
 
 namespace Drewlabs\Auth\Jwt\Contracts;
 
-interface ClaimsFactoryInterface
+interface PayloadVerifier
 {
     /**
-     * Creates jwt claims from array configurations.
+     * Check if payload generated from the token decode operation has valid values.
+     *
+     * @param array|object $payload
+     *
+     * @return bool
      */
-    public function create(ClaimsConfigInterface $config): ClaimsInterface;
+    public function verify(array $payload);
 }

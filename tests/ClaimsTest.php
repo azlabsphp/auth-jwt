@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Drewlabs\Auth\Jwt\Contracts\ClaimsInterface;
 use Drewlabs\Auth\Jwt\Payload\Claims;
 use Drewlabs\Auth\Jwt\Payload\ClaimTypes;
-use Drewlabs\Contracts\Jwt\ClaimsInterface;
 use PHPUnit\Framework\TestCase;
 
 class ClaimsTest extends TestCase

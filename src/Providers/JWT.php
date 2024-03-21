@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Drewlabs\Auth\Jwt\Providers;
 
+use Drewlabs\Auth\Jwt\Contracts\JWTInterface;
 use Drewlabs\Auth\Jwt\Exceptions\DecodeTokenException;
-use Drewlabs\Contracts\Jwt\JWTInterface;
 use Firebase\JWT\JWT as FirebaseJWT;
 use Firebase\JWT\Key as JWTKey;
 

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Drewlabs\Auth\Jwt\Payload;
 
-use Drewlabs\Contracts\Jwt\ClaimsInterface;
-use Drewlabs\Core\Helpers\ImmutableDateTime;
+use Drewlabs\Auth\Jwt\Contracts\ClaimsInterface;
+use Drewlabs\Core\Helpers\DateTime;
 use Drewlabs\Core\Helpers\Str;
 
 class Claims implements ClaimsInterface
@@ -137,7 +137,7 @@ class Claims implements ClaimsInterface
      */
     private function iat(): int
     {
-        return ImmutableDateTime::nowTz()->getTimestamp();
+        return DateTime::nowTz()->getTimestamp();
     }
 
     /**
@@ -145,7 +145,7 @@ class Claims implements ClaimsInterface
      */
     private function exp(): int
     {
-        return ImmutableDateTime::addMinutes(ImmutableDateTime::nowTz(), $this->ttl)->getTimestamp();
+        return DateTime::addMinutes(DateTime::nowTz(), $this->ttl)->getTimestamp();
     }
 
     /**
@@ -153,7 +153,7 @@ class Claims implements ClaimsInterface
      */
     private function nbf(): int
     {
-        return ImmutableDateTime::nowTz()->getTimestamp();
+        return DateTime::nowTz()->getTimestamp();
     }
 
     /**

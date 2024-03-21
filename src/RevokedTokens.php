@@ -16,7 +16,7 @@ namespace Drewlabs\Auth\Jwt;
 use Drewlabs\Auth\Jwt\Contracts\AccessTokenEntity;
 use Drewlabs\Auth\Jwt\Contracts\RevokeTokenManager;
 use Drewlabs\Auth\JwtOauth\Contracts\RevokedTokenStorageAdapter;
-use Drewlabs\Core\Helpers\ImmutableDateTime;
+use Drewlabs\Core\Helpers\DateTime;
 
 class RevokedTokens implements RevokeTokenManager
 {
@@ -51,12 +51,12 @@ class RevokedTokens implements RevokeTokenManager
     public function add(AccessTokenEntity $token)
     {
         $exp = $token->expiresAt();
-        $refresh_exp = ImmutableDateTime::addMinutes(
+        $refresh_exp = DateTime::addMinutes(
             $token->issuedAt(),
             $this->refreshTTL
         );
         // No need to blacklist token if already expired
-        if (ImmutableDateTime::ispast($exp) && ImmutableDateTime::ispast($refresh_exp)) {
+        if (DateTime::ispast($exp) && DateTime::ispast($refresh_exp)) {
             return false;
         }
         // TODO: Revoke the token

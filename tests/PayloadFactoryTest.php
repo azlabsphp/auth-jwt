@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Drewlabs\Auth\Jwt\Contracts\PayloadFactoryInterface;
 use Drewlabs\Auth\Jwt\Payload\Claims;
 use Drewlabs\Auth\Jwt\Payload\ClaimTypes;
 use Drewlabs\Auth\Jwt\Payload\PayloadFactory;
-use Drewlabs\Contracts\Jwt\PayloadFactoryInterface;
-use Drewlabs\Core\Helpers\ImmutableDateTime;
+use Drewlabs\Core\Helpers\DateTime;
 use PHPUnit\Framework\TestCase;
 
 class PayloadFactoryTest extends TestCase
@@ -46,7 +46,7 @@ class PayloadFactoryTest extends TestCase
         $this->assertTrue(in_array(ClaimTypes::JIT, array_keys($payload), true));
         $this->assertSame($exp->getTimestamp(), $payload[ClaimTypes::EXPIRATION]);
         $this->assertSame((new \DateTimeImmutable())->getTimestamp(), $payload[ClaimTypes::NOT_BEFORE]);
-        $this->assertTrue(ImmutableDateTime::isfuture(\DateTimeImmutable::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s', $payload[ClaimTypes::EXPIRATION]))));
+        $this->assertTrue(DateTime::isfuture(\DateTimeImmutable::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s', $payload[ClaimTypes::EXPIRATION]))));
     }
 
     private function createClaims()

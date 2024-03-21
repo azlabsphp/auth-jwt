@@ -15,8 +15,8 @@ namespace Drewlabs\Auth\Jwt;
 
 use Drewlabs\Auth\Jwt\Contracts\ClaimsConfigInterface;
 use Drewlabs\Auth\Jwt\Contracts\ClaimsFactoryInterface;
+use Drewlabs\Auth\Jwt\Contracts\ClaimsInterface;
 use Drewlabs\Auth\Jwt\Payload\Claims;
-use Drewlabs\Contracts\Jwt\ClaimsInterface;
 
 class ClaimsFactory implements ClaimsFactoryInterface
 {

@@ -22,8 +22,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.0|^8.0",
-        "drewlabs/contracts": "^0.2.23",
-        "drewlabs/core-helpers": "^0.2.2",
+        "drewlabs/contracts": "^0.3",
+        "drewlabs/core-helpers": "^0.3",
         "firebase/php-jwt": "^6.0"
     },
     "config": {

@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Drewlabs\Auth\Jwt\Payload;
 
-use Drewlabs\Contracts\Jwt\PayloadFactoryInterface;
-use Drewlabs\Contracts\Jwt\PayloadVerifier as JwtPayloadVerifier;
+use Drewlabs\Auth\Jwt\Contracts\PayloadFactoryInterface;
+use Drewlabs\Auth\Jwt\Contracts\PayloadVerifier as AbstractPayloadVerifier;
 use Drewlabs\Core\Helpers\Str;
 
-class PayloadVerifier implements JwtPayloadVerifier
+class PayloadVerifier implements AbstractPayloadVerifier
 {
     /**
      * Payload factory instance provider.

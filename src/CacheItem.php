@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Drewlabs\Auth\Jwt;
 
-use Drewlabs\Core\Helpers\ImmutableDateTime;
+use Drewlabs\Core\Helpers\DateTime;
 
 class CacheItem implements \JsonSerializable
 {
@@ -80,6 +80,6 @@ class CacheItem implements \JsonSerializable
             return false;
         }
 
-        return ImmutableDateTime::ispast($this->expiresAt);
+        return DateTime::ispast($this->expiresAt);
     }
 }
